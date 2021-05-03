@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class district(models.Model):
-    name=models.CharField(max_length=50, blank=False)
+    name=models.CharField(max_length=50, blank=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -15,13 +15,13 @@ class thana(models.Model):
         return 'District:' + self.thana +', Thana:'+ self.name
     
 class empdepartment(models.Model):
-    name=models.CharField(max_length=100, blank=False)
+    name=models.CharField(max_length=100, blank=False, unique=True)
     
     def __str__(self):
         return self.name
 
 class empdesignation(models.Model):
-    name=models.CharField(max_length=50, blank=False)
+    name=models.CharField(max_length=50, blank=False, unique=True)
 
     def __str__(self):
         return self.name
