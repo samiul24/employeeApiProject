@@ -1,8 +1,14 @@
-from .models import district, thana, empdepartment, empdesignation, empbasicinfo, empsalary, empeducation
+from .models import District, Thana, EmpDepartment, EmpDesignation, EmpBasicInfo, EmpSalary, EmpEducation
 from rest_framework import serializers
 
-class serializerdistrict(serializers.ModelSerializer):
+class SerializerDistrict(serializers.ModelSerializer):
     class Meta:
-        model=district
+        attribute=False
+        model=District
+        fields='__all__'
+
+class SerializerEmpDepartment(serializers.ModelSerializer):
+    class Meta:
+        model=EmpDepartment
         fields='__all__'
 

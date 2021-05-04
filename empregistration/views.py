@@ -5,15 +5,16 @@ from rest_framework.views import APIView
 from rest_framework.response import Response 
 from rest_framework import status
 
-from .models import district
-from .serializers import serializerdistrict
+from .models import District, EmpDepartment
+from .serializers import SerializerDistrict, SerializerEmpDepartment
 
 # Create your views here.
 
 class Districts(APIView):
     def get(self, request):
-        districts=district.objects.all()
-        serializer=serializerdistrict(districts, many=True)
+        districts=District.objects.all()
+        print(districts)
+        serializer=SerializerDistrict(districts, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -21,14 +22,14 @@ class Districts(APIView):
         data=data["name"]
         print(data)
         global dist
-        distname=district.objects.filter(name=data)
+        distname=District.objects.filter(name=data)
         """distname1=district.objects.filter(name=data).count()
         print(distname1)"""
-        for dist in distname:
+        """for dist in distname:
             dist=dist.name
-            print(dist)
-        if data != dist:
-            serializer=serializerdistrict(data=request.data)
+            print(dist)"""
+        if dataname is None:
+            serializer=SerializerDistrict(data=request.data)
             print(serializer)
             print(type(request.data))
             if serializer.is_valid():
@@ -40,8 +41,8 @@ class Districts(APIView):
 class District(APIView):
     def get_object(self, pk):
         try:
-            return district.objects.get(pk=pk)
-        except district.DoesNotExist:
+            return District.objects.get(pk=pk)
+        except District.DoesNotExist:
             raise Http404
 
     def get(self, request, pk):
@@ -49,6 +50,14 @@ class District(APIView):
         serializer=serializerdistrict(district)
         return Response(serializer.data)
 
+
+
+class EmpDepartment(APIView):
+    def get(self, request):
+        department=EmpDepartment.objects.all()
+        print(department)
+        serializer=SerializerEmpDepartment(department, many=True)
+        return Response(serializer.data)
     
 
 
